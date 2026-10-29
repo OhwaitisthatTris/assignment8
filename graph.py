@@ -90,7 +90,7 @@ class Graph:
     def bfs(self, start, goal):
         # Copy and paste your code from dfs() making the one 
         # important one-line change to it to make it bfs()
-         explored = {}
+        explored = {}
         explored[start] = start
 
         frontier = Queue()
