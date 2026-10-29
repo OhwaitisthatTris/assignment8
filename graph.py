@@ -1,6 +1,6 @@
 # graph.py
 # A graph stored using an adjacency list
-# Modified by:
+# Modified by: Tristan Crawford
 # Note: Please write this yourself, not using an LLM.
 from stack import Stack
 from que import Queue
@@ -34,8 +34,9 @@ class Graph:
     # and  *to* is one of its neighbors
     # Return True only if both criteria are true
     def edge_exists(self, from_, to):
-        # YOUR CODE HERE
-        pass
+     # the edge can only exist if from_ is a vertex in the graph,
+     # and it does exist if to is one of from_'s neighbors
+        return from_ in self._adjacency_list and to in self._adjacency_list[from_]        
     
     # Work backwards to find a path from your dfs()
     # or bfs() goal using the explored dictionary as
@@ -70,13 +71,40 @@ class Graph:
         # 7. Mark how you got to them and add them to the frontier
         # 8. Return None if you search through everything and never
         # find the goal
-        # YOUR CODE HERE
+        frontier = Stack()
+        frontier.push(start)
+        while not frontier.is_empty:
+            current = frontier.pop()
+
+            if current == goal:
+                return self._path_map_to_path(explored, goal)
+            for neighbor in self.neighbors(current):
+
+                if neighbor not in explored:
+                    
+                    explored[neighbor] = current
+                    frontier.push(neighbor)
+        return None
+
     
     def bfs(self, start, goal):
         # Copy and paste your code from dfs() making the one 
         # important one-line change to it to make it bfs()
-        # YOUR CODE HERE
-        pass
+         explored = {}
+        explored[start] = start
+
+        frontier = Queue()
+        frontier.push(start)
+        while not frontier.is_empty:
+            current = frontier.pop()
+            if current == goal:
+                return self._path_map_to_path(explored, goal)
+            for neighbor in self.neighbors(current):
+                if neighbor not in explored:
+                    explored[neighbor] = current
+                    frontier.push(neighbor)
+        return None
+        
     
     def print_explored(self, explored):
         for k, v in explored.items():
