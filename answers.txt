@@ -1,0 +1,17 @@
+Tristan Crawford
+
+ 
+1. It depends. BFS is faster when the goal is close to the start, and it always
+   finds the path with the fewest edges. DFS can be faster when the goal is deep
+   and it happens to go down the right branch first.
+ 
+2. O(V + E). Each vertex is added to the queue at most once, and each edge is
+   looked at a constant number of times.
+ 
+3. A matrix needs V x V cells even though each person has only a few hundred
+   friends out of millions of users, so almost every cell is empty. A list only
+   stores the friendships that exist.
+ 
+4. Exploring a maze by following one hallway to a dead end, then backing up to
+   the last junction and trying the next hallway.
+ 
